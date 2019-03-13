@@ -1,20 +1,42 @@
 import React, { Component } from 'react';
-import { Container, Content, Footer, FooterTab, Button, Text } from 'native-base';
+import { Container, Content, Footer, FooterTab, Button, Text, Form, Item, Input } from 'native-base';
 import { StyleSheet } from 'react-native';
+import { login } from '../actions/auth';
+import { connect } from 'react-redux';
 
-// this.props.navigation.push('Todo') // for stack
-// this.props.navigation.navigate("Todo")// for tab
 class LoginComponent extends Component {
+    state = {
+        text: ''
+    }
+
+    login = () => {
+        if (this.state.text.trim() === '') {
+            return;
+        }
+        this.props.login(this.state.text);
+        this.setState({ text: "" });
+    }
+
+    inputChangeHandler = (value) => {
+        this.setState({
+            text: value
+        });
+    }
     render() {
         return (
             <Container style={styles.header}>
                 <Content>
-                    <Text>This is login page</Text>
                 </Content>
+                <Form>
+                    <Item style={styles.inputContainer}>
+                        <Input placeholder="Name" value={this.state.text}
+                            onChangeText={this.inputChangeHandler} />
+                    </Item>
+                </Form>
                 <Footer>
                     <FooterTab>
-                        <Button onPress={() => this.props.navigation.navigate("Todo")}>
-                            <Text>Go Login</Text>
+                        <Button onPress={this.login} style={styles.btn}>
+                            <Text style={styles.btn}>Go Login</Text>
                         </Button>
                     </FooterTab>
                 </Footer>
@@ -24,8 +46,11 @@ class LoginComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-    header: {
-        backgroundColor: "transparent",
+    btn: {
+        backgroundColor: "#24D330",
+        color: "#FFF",
+        fontWeight: 'bold',
+
     },
     inputContainer: {
         flexDirection: 'row',
@@ -44,9 +69,12 @@ const styles = StyleSheet.create({
     }
 });
 
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (name) => {
+            dispatch(login(name))
+        }
+    }
+}
 
-
-
-export default LoginComponent;
-
-
+export default connect(null, mapDispatchToProps)(LoginComponent);

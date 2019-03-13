@@ -14,7 +14,7 @@ class TodoComponent extends Component {
             return;
         }
         this.props.add(this.state.text);
-        // this.setState({ text: "" });
+        this.setState({ text: "" });
     }
 
     inputChangeHandler = (value) => {
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
     return {
-        add: (name) => {
-            dispatch(addTodo(name))
+        add: (todo) => {
+            dispatch(addTodo(todo))
         }
     }
 }

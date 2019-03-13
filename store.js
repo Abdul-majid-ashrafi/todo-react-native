@@ -5,6 +5,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
 
 import todoReducer from './reducers/todoReducer';
+import authReducer from './reducers/authReducer';
 
 const persistConfig = {
     key: 'root',
@@ -12,7 +13,8 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-    todoList: todoReducer
+    todoList: todoReducer,
+    authReducer: authReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

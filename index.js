@@ -7,7 +7,11 @@ import { PersistGate } from 'redux-persist/integration/react'
 import configureStore from './store';
 
 const { store, persistor } = configureStore();
-
+//   persistor.purge().then((response) => {
+//                 console.log("XXXXXX ", response)
+//             }).catch(error => {
+//                 console.log("XEEXXXXXEEEEEE ", error)
+//             })
 const RNRedux = () => (
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
