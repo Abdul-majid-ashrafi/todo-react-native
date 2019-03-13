@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const ListItem = (props) => {
+const ListItemComponent = (props) => {
   return (
     <TouchableOpacity>
       <View style={styles.listItem}>
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ListItem;
+export default ListItemComponent;
