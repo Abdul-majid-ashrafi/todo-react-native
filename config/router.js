@@ -27,6 +27,9 @@ const Tabs = createBottomTabNavigator({
 const AppNavigator = createStackNavigator({
   Login: {
     screen: LoginComponent,
+    navigationOptions: {
+      header: null //this will hide the header
+    },
   },
   Tabs: {
     screen: Tabs

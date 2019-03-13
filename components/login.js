@@ -13,8 +13,8 @@ class LoginComponent extends Component {
                 </Content>
                 <Footer>
                     <FooterTab>
-                        <Button onPress={() => this.props.navigation.navigate("Todo")} full>
-                            <Text>Go to Todo</Text>
+                        <Button onPress={() => this.props.navigation.navigate("Todo")}>
+                            <Text>Go Login</Text>
                         </Button>
                     </FooterTab>
                 </Footer>
