@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, FlatList } from 'react-native';
-import ListItem from './ListItem';
+import { StyleSheet, View, TextInput, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions/todo';
 
@@ -24,19 +23,6 @@ class TodoComponent extends Component {
         });
     }
 
-    todolist = () => {
-        return (
-            <FlatList style={styles.listContainer}
-                data={this.props.todoList}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={info => (
-                    <ListItem text={info.item.value}
-                    />
-                )}
-            />
-        )
-    }
-
     render() {
         return (
             <View style={styles.container}>
@@ -51,9 +37,6 @@ class TodoComponent extends Component {
                         style={styles.todoButton}
                         onPress={this.submitTodo}
                     />
-                </View>
-                <View style={styles.listContainer}>
-                    {this.todolist()}
                 </View>
             </View>
         );
@@ -83,14 +66,6 @@ const styles = StyleSheet.create({
     }
 });
 
-
-const mapStateToProps = state => {
-    console.log(state)
-    return {
-        todoList: state.todoList.todoList
-    }
-}
-
 const mapDispatchToProps = dispatch => {
     return {
         add: (name) => {
@@ -99,4 +74,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoComponent);
+export default connect(null, mapDispatchToProps)(TodoComponent);
