@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import createRootNavigator from './config/router';
 import { connect } from 'react-redux';
-// import configureStore from './store';
+import configureStore from './store';
 
 
 class App extends Component {
@@ -10,24 +10,19 @@ class App extends Component {
     }
 
     componentWillMount() {
-        // console.log(this.props.authReducer)
+        const { persistor } = configureStore();
+        if (!this.props.authReducer.isLoggedIn) {
+            persistor.purge().then(() => {
+                console.log("Success")
+            }).catch(error => {
+                console.log("Got an Errorr  ", error)
+            })
+        }
     }
-
 
     render() {
         let isLoggedIn = false;
         isLoggedIn = this.props.authReducer.isLoggedIn;
-        // console.log(this.state)
-
-        // this.setState({ isLoggedIn: this.props.authReducer.isLoggedIn })
-        // const { persistor } = configureStore();
-        // if (!this.state.isLoggedIn) {
-        // persistor.purge().then((response) => {
-        //     console.log("XXXXXX ", response)
-        // }).catch(error => {
-        //     console.log("XEEXXXXXEEEEEE ", error)
-        // })
-        // }
         const Layout = createRootNavigator(isLoggedIn);
         return <Layout />;
     }

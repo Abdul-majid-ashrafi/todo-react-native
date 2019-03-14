@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Content, Footer, FooterTab, Button, Text, Form, Item, Input } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Container, Button, Text, Item, Input } from 'native-base';
+import { StyleSheet, View } from 'react-native';
 import { login } from '../actions/auth';
 import { connect } from 'react-redux';
 
@@ -12,9 +12,10 @@ class LoginComponent extends Component {
     login = () => {
         if (this.state.text.trim() === '') {
             return;
+        } else {
+            this.props.login(this.state.text);
+            this.setState({ text: "" });
         }
-        this.props.login(this.state.text);
-        this.setState({ text: "" });
     }
 
     inputChangeHandler = (value) => {
@@ -25,9 +26,20 @@ class LoginComponent extends Component {
     render() {
         return (
             <Container style={styles.header}>
-                <Content>
-                </Content>
-                <Form>
+                <View style={styles.bottom}>
+
+                    <Item style={styles.inputContainer}>
+                        <Input placeholder="Enter your name" value={this.state.text}
+                            onChangeText={this.inputChangeHandler} style={styles.input} />
+                    </Item>
+
+                    <Button block onPress={this.login} style={styles.btn}>
+                        <Text>Login</Text>
+                    </Button>
+                </View>
+                {/* <Content>
+                </Content> */}
+                {/* <Form>
                     <Item style={styles.inputContainer}>
                         <Input placeholder="Name" value={this.state.text}
                             onChangeText={this.inputChangeHandler} />
@@ -39,7 +51,7 @@ class LoginComponent extends Component {
                             <Text style={styles.btn}>Go Login</Text>
                         </Button>
                     </FooterTab>
-                </Footer>
+                </Footer> */}
             </Container>
         )
     }
@@ -52,14 +64,26 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
 
     },
+    bottom: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        marginBottom: 30,
+        marginLeft: 20,
+        marginRight: 20
+    },
     inputContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%'
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        marginBottom: 20,
+        // height: 70
     },
     input: {
-        width: '70%'
+        // height: 70,
+        // backgroundColor: '#ffffff',
+        // paddingLeft: 15,
+        // paddingRight: 15
     },
     todoButton: {
         width: '30%'
