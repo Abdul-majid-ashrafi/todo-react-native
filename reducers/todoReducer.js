@@ -1,6 +1,6 @@
 // todoReducer.js
 
-import { ADD_TODO, LOGOUT } from '../actions/types';
+import { ADD_TODO, DELETE_TODO, LOGOUT } from '../actions/types';
 
 const initialState = {
     todoList: []
@@ -18,6 +18,11 @@ const todoReducer = (state = initialState, action) => {
                     color: action.payload.color,
                     time: action.payload.time,
                 })
+            };
+        case DELETE_TODO:
+            // const todoList = state.todoList;
+            return state = {
+                todoList : new Array().concat(action.payload)
             };
         case LOGOUT:
             return state = {

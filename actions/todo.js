@@ -1,4 +1,4 @@
-import { ADD_TODO } from './types';
+import { ADD_TODO, DELETE_TODO } from './types';
 
 export const addTodo = todo => {
     return {
@@ -8,5 +8,12 @@ export const addTodo = todo => {
             color: todo.color,
             time: todo.time,
         }
+    }
+}
+
+export const deleteTodo = todos => {
+    return {
+        type: DELETE_TODO,
+        payload: todos
     }
 }
