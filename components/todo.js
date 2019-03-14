@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions/todo';
+import { Container, Header, Title, Right, Body, Textarea, Content, DatePicker } from "native-base";
 
 class TodoComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: '',
+            time: new Date(),
+            color: 'blue'
+        };
+        this.setDate = this.setDate.bind(this);
+    }
 
-    state = {
-        text: ''
+    setDate(newDate) {
+        this.setState({ time: newDate });
     }
 
     submitTodo = () => {
         if (this.state.text.trim() === '') {
             return;
         }
-        this.props.add(this.state.text);
-        this.setState({ text: "" });
+        this.props.add(this.state);
+        console.log("NEW TODO ", this.state)
+        this.setState({ text: "", color: "blue", time: new Date() });
     }
 
     inputChangeHandler = (value) => {
@@ -22,23 +33,46 @@ class TodoComponent extends Component {
             text: value
         });
     }
-
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        placeholder="Add Todo"
-                        style={styles.input}
+            <Container>
+                <Header span style={styles.header}>
+                    <Body>
+                        <Title>Add</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                <Content padder>
+                    <Textarea rowSpan={2} bordered
+                        placeholder="When do you need to do?"
                         value={this.state.text}
                         onChangeText={this.inputChangeHandler}
-                    ></TextInput>
-                    <Button title='Add'
-                        style={styles.todoButton}
+                    />
+                    <View style={styles.dateContainer}>
+                        <DatePicker
+                            // defaultDate={new Date(2018, 4, 4)}
+                            minimumDate={new Date(2018, 1, 1)}
+                            maximumDate={new Date(2018, 12, 31)}
+                            locale={"en"}
+                            timeZoneOffsetInMinutes={undefined}
+                            modalTransparent={false}
+                            animationType={"fade"}
+                            androidMode={"default"}
+                            placeHolderText="What is it due?"
+                            textStyle={{ color: "green" }}
+                            placeHolderTextStyle={{ color: "#d3d3d3" }}
+                            onDateChange={this.setDate}
+                            disabled={false}
+                        />
+                        {/* <Text>
+                        Date: {this.state.time.toString().substr(4, 12)}
+                    </Text> */}
+                    </View>
+                    <Button title='Add' full success
                         onPress={this.submitTodo}
                     />
-                </View>
-            </View>
+                </Content>
+            </Container>
         );
     }
 }
@@ -49,20 +83,17 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    inputContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    header: {
+        backgroundColor: "#24D330",
+        color: "#FFF",
+        fontWeight: 'bold',
+    },
+    dateContainer: {
         alignItems: 'center',
-        width: '100%'
-    },
-    input: {
-        width: '70%'
-    },
-    todoButton: {
-        width: '30%'
-    },
-    listContainer: {
-        width: '100%'
+        textAlign: 'center',
+        paddingTop: 10,
+        paddingBottom: 10,
+        // border: '2px solid black'
     }
 });
 

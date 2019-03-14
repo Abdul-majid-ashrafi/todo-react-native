@@ -1,6 +1,6 @@
 // todoReducer.js
 
-import { ADD_TODO } from '../actions/types';
+import { ADD_TODO, LOGOUT } from '../actions/types';
 
 const initialState = {
     todoList: []
@@ -14,9 +14,15 @@ const todoReducer = (state = initialState, action) => {
                 ...state,
                 todoList: state.todoList.concat({
                     key: Math.random(),
-                    value: action.payload
+                    value: action.payload.text,
+                    color: action.payload.color,
+                    time: action.payload.time,
                 })
             };
+        case LOGOUT:
+            return state = {
+                todoList: [],
+            }
         default:
             return state;
     }

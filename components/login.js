@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Button, Text, Item, Input } from 'native-base';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { login } from '../actions/auth';
 import { connect } from 'react-redux';
 
@@ -26,8 +26,10 @@ class LoginComponent extends Component {
     render() {
         return (
             <Container style={styles.header}>
+                <View style={styles.img}>
+                    <Image source={require('../assets/sheildTodo.png')} />
+                </View>
                 <View style={styles.bottom}>
-
                     <Item style={styles.inputContainer}>
                         <Input placeholder="Enter your name" value={this.state.text}
                             onChangeText={this.inputChangeHandler} style={styles.input} />
@@ -70,6 +72,11 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         marginLeft: 20,
         marginRight: 20
+    },
+    img: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     inputContainer: {
         borderLeftWidth: 1,
