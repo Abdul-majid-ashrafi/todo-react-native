@@ -1,62 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Button, Text, Item, Input } from 'native-base';
 import { StyleSheet, View, Image } from 'react-native';
-import { login } from '../actions/auth';
-import { connect } from 'react-redux';
 
-class LoginComponent extends Component {
-    state = {
-        text: ''
-    }
-
-    login = () => {
-        if (this.state.text.trim() === '') {
-            return;
-        } else {
-            this.props.login(this.state.text);
-            this.setState({ text: "" });
-        }
-    }
-
-    inputChangeHandler = (value) => {
-        this.setState({
-            text: value
-        });
-    }
-    render() {
-        return (
-            <Container style={styles.header}>
-                <View style={styles.img}>
-                    <Image source={require('../assets/sheildTodo.png')} />
-                </View>
-                <View style={styles.bottom}>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder="Enter your name" value={this.state.text}
-                            onChangeText={this.inputChangeHandler} style={styles.input} />
-                    </Item>
-
-                    <Button block onPress={this.login} style={styles.btn}>
-                        <Text>Login</Text>
-                    </Button>
-                </View>
-                {/* <Content>
-                </Content> */}
-                {/* <Form>
-                    <Item style={styles.inputContainer}>
-                        <Input placeholder="Name" value={this.state.text}
-                            onChangeText={this.inputChangeHandler} />
-                    </Item>
-                </Form>
-                <Footer>
-                    <FooterTab>
-                        <Button onPress={this.login} style={styles.btn}>
-                            <Text style={styles.btn}>Go Login</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer> */}
-            </Container>
-        )
-    }
+const LoginComponent = (props) => {
+    return (
+        <Container style={styles.header}>
+            <View style={styles.img}>
+                <Image source={require('../assets/logo.jpeg')} />
+            </View>
+            <View style={styles.bottom}>
+                <Item style={styles.inputContainer}>
+                    <Input placeholder="Enter your name" value={props._state.text}
+                        onChangeText={props._inputChangeHandler} style={styles.input} />
+                </Item>
+                <Button block onPress={props._login} style={styles.btn}>
+                    <Text>Login</Text>
+                </Button>
+            </View>
+        </Container>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -85,27 +47,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: 20,
         // height: 70
-    },
-    input: {
-        // height: 70,
-        // backgroundColor: '#ffffff',
-        // paddingLeft: 15,
-        // paddingRight: 15
-    },
-    todoButton: {
-        width: '30%'
-    },
-    listContainer: {
-        width: '100%'
     }
 });
 
-const mapDispatchToProps = dispatch => {
-    return {
-        login: (name) => {
-            dispatch(login(name))
-        }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(LoginComponent);
+export default LoginComponent;

@@ -1,22 +1,22 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation";
-import { ListItemComponent, TodoComponent, LoginComponent, ProfileComponent } from '../components';
+import { TodoContainer, ListItemContainer, ProfileContainer,LoginContainer } from '../container';
 
 const TabNavigation = createBottomTabNavigator({
   ListItem: {
-    screen: ListItemComponent,
+    screen: ListItemContainer,
   },
   Todo: {
-    screen: TodoComponent,
+    screen: TodoContainer,
   },
   Profile: {
-    screen: ProfileComponent,
+    screen: ProfileContainer,
   }
 });
 
 const StackNavigation = createStackNavigator({
   Login: {
-    screen: LoginComponent,
+    screen: LoginContainer,
     navigationOptions: {
       header: null //this will hide the header
     }
