@@ -12,7 +12,7 @@ class TodoComponent extends Component {
     super(props);
     this.state = {
       text: '',
-      time: new Date(),
+      time: null,
       color: 'blue'
     };
   }
@@ -22,7 +22,7 @@ class TodoComponent extends Component {
       return;
     }
     this.props.add(this.state);
-    this.setState({ text: "", color: "blue", time: new Date() });
+    this.setState({ text: "", color: "blue" });
   }
 
   inputChangeHandler = (value) => {

@@ -62,11 +62,11 @@ class ListItemComponent extends Component {
 									</Left>
 									<Body>
 										<Text>{value.value}</Text>
-										<Text note>Doing w.</Text>
 									</Body>
-									{/* <Right>
-							<Text note>3:43 pm</Text>
-						</Right> */}
+									<Right>
+										<Text note>{value.time}</Text>
+										{/* <Text note>3:43 pm</Text> */}
+									</Right>
 								</ListItem>
 							</Swipeout>
 						</List>
